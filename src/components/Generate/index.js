@@ -31,9 +31,9 @@ const Generate = () => {
     }, [openForm]);
 
     const handleToggleOpenForm = useCallback(() => setOpenForm(!openForm), [openForm]);
-    const handleFormListAddButton = useCallback(value => emptyValueCheck(list) ? setList(value) : setList([...list, value]), [list]);
+    const handleFormListAddButton = useCallback(value => emptyValueCheck(list) ? setList([value]) : setList([...list, value]), [list]);
     const handleListDelete = useCallback((index) => list.splice(index, 1), [list]);
-    const handleCardAddButton = useCallback((index, value) => list[index].cardList.push(value), [list], [list]);
+    const handleCardAddButton = useCallback((index, value) => list[index].cardList.push(value), [list]);
 
     console.log('generate', list);
     return <div>

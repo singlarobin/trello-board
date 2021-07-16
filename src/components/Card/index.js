@@ -8,7 +8,9 @@ const Card = props => {
     return <div className={classes.container}>
         <div className={classes.cardHeader}>
             <div className={classes.cardTitle}>{title}</div>
-            <IconButton>
+            <IconButton style={{
+            cursor: 'pointer',
+        }}>
                 <DeleteIcon />
             </IconButton>
         </div>
