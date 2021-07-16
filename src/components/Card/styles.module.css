@@ -1,0 +1,33 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: #112733;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+.cardHeader{
+    display: flex;
+    justify-content: space-between;
+    color: #efefef;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    color: #efefef;
+} 
+
+.cardDescription {
+    font-size: 0.9rem;
+    word-wrap: break-word;
+    text-align: left;
+}
+
+.cardDate{
+    text-align: end;
+    font-size: 0.6rem;
+    opacity: 0.75;
+}

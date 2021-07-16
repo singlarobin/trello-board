@@ -1,0 +1,5 @@
+.listContainer {
+    margin: 1rem;
+    display: flex;
+    grid-row: 1;
+}

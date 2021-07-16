@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: #152d3a;
+    width: 20vw;
+    height: 70vh;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    color: #efefef;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
