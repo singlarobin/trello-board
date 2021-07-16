@@ -4,6 +4,7 @@
     background-color: #112733;
     margin-bottom: 1rem;
     padding: 0.5rem;
+    cursor: move;
 }
 
 .cardHeader{

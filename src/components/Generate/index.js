@@ -32,8 +32,37 @@ const Generate = () => {
 
     const handleToggleOpenForm = useCallback(() => setOpenForm(!openForm), [openForm]);
     const handleFormListAddButton = useCallback(value => emptyValueCheck(list) ? setList([value]) : setList([...list, value]), [list]);
-    const handleListDelete = useCallback((index) => list.splice(index, 1), [list]);
-    const handleCardAddButton = useCallback((index, value) => list[index].cardList.push(value), [list]);
+    const handleListDelete = useCallback((index) => {
+        const currList = list.filter((item, ind) => {
+            return ind !== index;
+        });
+        setList(currList);
+    }, [list]);
+
+    const handleCardAddButton = useCallback((index, value) => {
+        const currList = list.map((item, ind) => {
+            let currCardList = item.cardList;
+            if (index === ind) {
+                currCardList.push(value);
+            }
+            return item;
+        });
+        setList(currList);
+    }, [list]);
+
+    const handleCardDeleteButton = useCallback((listIndex, cardIndex) => {
+        const currList = list.map((item, index) => {
+            if (index === listIndex) {
+                const currCardList = item.cardList.filter((card, ind) => {
+                    return ind !== cardIndex;
+                });
+                item.cardList = currCardList;
+            }
+            return item;
+        });
+
+        setList(currList);
+    }, [list]);
 
     console.log('generate', list);
     return <div>
@@ -47,7 +76,8 @@ const Generate = () => {
         {openForm && <Form isList={openListInForm} handleFormClose={handleToggleOpenForm} handleAddData={handleFormListAddButton} />}
         <div className={classes.listContainer}>
             {!emptyValueCheck(list) && list.map((item, index) => (
-                <List key={index} index={index} listValue={item} handleListDelete={handleListDelete} handleCardAddButton={handleCardAddButton} />
+                <List key={index} index={index} listValue={item} handleListDelete={handleListDelete}
+                    handleCardAddButton={handleCardAddButton} handleCardDeleteButton={handleCardDeleteButton} />
             ))}
         </div>
 

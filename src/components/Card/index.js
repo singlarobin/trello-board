@@ -3,12 +3,14 @@ import IconButton from '../IconButton';
 import DeleteIcon from '../assets/deleteIcon';
 
 const Card = props => {
-    const { title, description, date } = props;
+    const { index, title, description, date, handleCardDelete } = props;
+
+    const handleDeleteButton = () => handleCardDelete(index);
 
     return <div className={classes.container}>
         <div className={classes.cardHeader}>
             <div className={classes.cardTitle}>{title}</div>
-            <IconButton style={{
+            <IconButton onClick={handleDeleteButton} style={{
             cursor: 'pointer',
         }}>
                 <DeleteIcon />

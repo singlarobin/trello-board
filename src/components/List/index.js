@@ -7,7 +7,7 @@ import Form from '../Form';
 import { useState } from 'react';
 
 const List = props => {
-    const { index, listValue, handleListDelete, handleCardAddButton } = props;
+    const { index, listValue, handleListDelete, handleCardAddButton, handleCardDeleteButton } = props;
     const [openForm, setOpenForm] = useState(false);
     const [isList, setIsList] = useState(false);
 
@@ -22,6 +22,7 @@ const List = props => {
     };
 
     const handleDeleteButton = () => handleListDelete(index);
+    const handleCardDelete = (cardIndex) => handleCardDeleteButton(index,cardIndex);
 
     console.log('list', listValue);
 
@@ -35,7 +36,7 @@ const List = props => {
         {openForm && <Form isList={isList} handleFormClose={handleToggleOpenForm} handleAddData={handleFormCardAddButton} />}
 
         {listValue.cardList.map((card, index) => (
-            <Card key={index} title={card.title} description={card.description} date={card.date} />
+            <Card key={index} index={index} title={card.title} description={card.description} date={card.date} handleCardDelete={handleCardDelete} />
         ))}
 
         <IconButton onClick={handleNewCardAddButton} style={{
