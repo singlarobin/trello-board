@@ -2,6 +2,7 @@ import classes from './styles.module.css';
 import Input from '../Input';
 import Button from '../Button';
 import { useCallback, useState } from 'react';
+import { emptyValueCheck } from '../../utils';
 
 const Form = props => {
 
@@ -18,9 +19,14 @@ const Form = props => {
         const dateTime = new Date().getDay() + "/" + new Date().getMonth() + "/" + new Date().getFullYear() + ', '
             + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds();
 
-        const listItem = isList ? { title: listName, cardList: [{ title: cardName, description: cardDescription, date: dateTime }] }
-            : { title: cardName, description: cardDescription, date: dateTime };
+        const cardList = (!emptyValueCheck(cardName)) && (!emptyValueCheck(cardDescription)) ?
+            { title: cardName, description: cardDescription, date: dateTime } : null;
 
+        if (!isList && emptyValueCheck(cardList)) {
+            alert('Missing Card Name or Description!!');
+            return;
+        }
+        const listItem = isList ? { title: listName, cardList: emptyValueCheck(cardList) ? [] : cardList } : cardList;
         handleFormClose();
         handleAddData(listItem);
     }, [handleFormClose, handleAddData, listName, cardName, cardDescription, isList]);

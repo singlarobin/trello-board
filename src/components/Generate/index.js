@@ -21,7 +21,7 @@ const Generate = () => {
     }, []);
 
     useEffect(() => {
-        console.log('1');
+        // console.log('1');
         localStorage.setItem('list', JSON.stringify(list))
     }, [list])
 
@@ -60,7 +60,6 @@ const Generate = () => {
             }
             return item;
         });
-
         setList(currList);
     }, [list]);
 

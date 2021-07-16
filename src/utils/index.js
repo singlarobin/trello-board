@@ -1,4 +1,4 @@
-const emptyValueCheck = value => value === null || value === undefined;
+const emptyValueCheck = value => !value || (typeof value === 'string' && value.trim() === '');
 
 export {
     emptyValueCheck,
