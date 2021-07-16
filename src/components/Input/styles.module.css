@@ -1,5 +1,5 @@
 .inputContent {
-    width: 50vw;
+    width: 68vw;
     font-size: 0.9rem;
     color: #efefef;
     background-color: #112733;
@@ -11,4 +11,16 @@
 
 .inputContent::placeholder {
     opacity: 0.75;
+}
+
+@media screen and (min-width: 768px) {
+    .inputContent {
+        width: 48vw;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    .inputContent {
+        width: 38vw;
+    }    
 }
