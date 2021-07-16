@@ -11,52 +11,31 @@ const List = props => {
     const { index, listValue, handleListDelete, handleCardAddButton, handleCardDeleteButton } = props;
     const [openForm, setOpenForm] = useState(false);
     const [isList, setIsList] = useState(false);
-    // const [listIndexOfCardToMove, setListIndexOfCardToMove] = useState(null);
-    // const [cardIndexToMove, setCardIndexToMove] = useState(null);
-    // const [cardToMove, setCardToMove] = useState(null);
 
-    const handleNewCardAddButton = () => {
+    const handleNewCardAddButton = useCallback(() => {
         setOpenForm(true);
         setIsList(false);
-    };
-    const handleToggleOpenForm = () => setOpenForm(!openForm);
-    const handleFormCardAddButton = value => {
-        console.log('value', value);
-        handleCardAddButton(index, value);
-    };
+    }, []);
 
-    const handleDeleteButton = () => handleListDelete(index);
-    const handleCardDelete = (cardIndex) => handleCardDeleteButton(index, cardIndex);
-
-    const handleOnDragOver = e => {
-        e.preventDefault();
-    }
+    const handleToggleOpenForm = useCallback(() => setOpenForm(!openForm), [openForm]);
+    const handleFormCardAddButton = useCallback(value => handleCardAddButton(index, value), [index, handleCardAddButton]);
+    const handleDeleteButton = useCallback(() => handleListDelete(index), [handleListDelete, index]);
+    const handleCardDelete = useCallback(cardIndex => handleCardDeleteButton(index, cardIndex), [handleCardDeleteButton, index]);
+    const handleOnDragOver = useCallback(e => e.preventDefault(), [])
 
     const handleOnDrop = useCallback(e => {
         e.preventDefault();
-        console.log("AAAAAA");
         let listIndexOfCardToMove = e.dataTransfer.getData('listIndexOfCardToMove');
         let cardIndexToMove = e.dataTransfer.getData('cardIndexToMove');
         let cardToMove = JSON.parse(e.dataTransfer.getData('cardDataToMove'));
-        let card = e.dataTransfer.getData('cardUI');
-        console.log('list drop:', e.target.id, '::', listIndexOfCardToMove, '::', cardIndexToMove, '::', cardToMove, '::',);
-        //console.log(cardIndexToMove, '::', listIndexOfCardToMove);
         if (e.target.id !== '' && parseInt(listIndexOfCardToMove) !== parseInt(e.target.id)) {
             handleCardDeleteButton(parseInt(listIndexOfCardToMove), parseInt(cardIndexToMove));
             handleCardAddButton(parseInt(e.target.id), cardToMove);
         }
-        else {
-            //console.log("111111111111111");
-            //console.log(document.getElementsByName('title'));
-            let element = document.getElementById(cardIndexToMove);
-            setTimeout(() => element.style.display = 'block', 0);
-        }
 
     }, [handleCardDeleteButton, handleCardAddButton]);
 
-
-    console.log('list', listValue);
-
+    // console.log('list', listValue);
     return <div id={index} className={classes.container} onDragOver={handleOnDragOver} onDrop={handleOnDrop}>
         <div className={classes.header} >
             {listValue.title}
@@ -64,16 +43,17 @@ const List = props => {
                 <DeleteIcon />
             </IconButton>
         </div>
+        <IconButton onClick={handleNewCardAddButton} style={{
+            cursor: 'pointer',
+            marginBottom: '1rem'
+        }}>
+            <AddIcon />
+        </IconButton>
         {openForm && <Form isList={isList} handleFormClose={handleToggleOpenForm} handleAddData={handleFormCardAddButton} />}
         {!emptyValueCheck(listValue.cardList) && listValue.cardList.map((card, ind) => (
             <Card key={ind} index={ind} listIndex={index} title={card.title} description={card.description} date={card.date}
                 handleCardDelete={handleCardDelete} />
         ))}
-        <IconButton onClick={handleNewCardAddButton} style={{
-            cursor: 'pointer',
-        }}>
-            <AddIcon />
-        </IconButton>
 
     </div>;
 }

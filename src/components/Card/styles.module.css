@@ -1,6 +1,7 @@
 .container {
     display: flex;
     flex-direction: column;
+    overflow: auto;
     background-color: #112733;
     margin-bottom: 1rem;
     padding: 0.5rem;
@@ -11,7 +12,7 @@
     display: flex;
     justify-content: space-between;
     color: #efefef;
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     margin-bottom: 1rem;
 }
 
@@ -30,5 +31,6 @@
 .cardDate{
     text-align: end;
     font-size: 0.6rem;
+    padding-top: 1rem;
     opacity: 0.75;
 }

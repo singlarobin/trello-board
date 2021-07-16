@@ -3,15 +3,16 @@
     flex-direction: column;
     background-color: #152d3a;
     width: 20vw;
-    height: 70vh;
+    height: 65vh;
     padding: 1rem;
     margin: 1rem;
+    overflow-y: auto;
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     color: #efefef;
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
 }

@@ -4,24 +4,18 @@ import IconButton from '../IconButton';
 import AddIcon from '../assets/addIcon';
 import List from '../List';
 import { emptyValueCheck } from '../../utils';
-import { useCallback, useEffect, useState } from 'react';
-
-//list:[{title:title, cardList:[{title,decription,date}, {}]}, {}]
+import { Fragment, useCallback, useEffect, useState } from 'react';
 
 const Generate = () => {
     const [openForm, setOpenForm] = useState(false);
     const [openListInForm, setOpenListInForm] = useState(false);
     const [list, setList] = useState([]);
 
-    // const l = [{ title: 'A', cardList: [{ title: 'LMN', description: 'mkmk', date: '2-01-2020' }, { title: 'XYZ', description: 'njmk', date: '21-01-2021' }] },
-    // { title: 'B', cardList: [{ title: 'PQR', description: 'lkde', date: '2-01-2020' }, { title: 'XYZ', description: 'njmk', date: '21-01-2021' }] }]
-
     useEffect(() => {
         setList(JSON.parse(localStorage.getItem('list')));
     }, []);
 
     useEffect(() => {
-        // console.log('1');
         localStorage.setItem('list', JSON.stringify(list))
     }, [list])
 
@@ -30,7 +24,7 @@ const Generate = () => {
         setOpenListInForm(true);
     }, [openForm]);
 
-    const handleToggleOpenForm = useCallback(() => setOpenForm(!openForm), [openForm]);
+    const handleToggleOpenForm = useCallback(() => setOpenForm(false), []);
     const handleFormListAddButton = useCallback(value => emptyValueCheck(list) ? setList([value]) : setList([...list, value]), [list]);
     const handleListDelete = useCallback((index) => {
         const currList = list.filter((item, ind) => {
@@ -44,7 +38,10 @@ const Generate = () => {
             let currCardList = item.cardList;
             if (index === ind) {
                 currCardList.push(value);
+                currCardList = currCardList.sort((a, b) => new Date(b.date) - new Date(a.date));
             }
+
+
             return item;
         });
         setList(currList);
@@ -63,8 +60,8 @@ const Generate = () => {
         setList(currList);
     }, [list]);
 
-    console.log('generate', list);
-    return <div>
+    // console.log('generate', list);
+    return <Fragment>
         <IconButton onClick={handleNewListAddButton} style={{
             textAlign: 'end',
             margin: '1rem',
@@ -80,7 +77,7 @@ const Generate = () => {
             ))}
         </div>
 
-    </div>;
+    </Fragment>;
 }
 
 export default Generate;
