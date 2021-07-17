@@ -41,6 +41,11 @@ const Form = props => {
             alert('Missing Card Name or Description!!');
             return;
         }
+
+        if(isList && emptyValueCheck(listName)){
+            alert('Missing List Name!!');
+            return;
+        }
         const listItem = isList ? { title: listName, cardList: emptyValueCheck(cardList) ? [] : [cardList] } : cardList;
         handleFormClose();
         handleAddData(listItem);

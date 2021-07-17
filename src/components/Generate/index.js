@@ -40,8 +40,6 @@ const Generate = () => {
                 currCardList.push(value);
                 currCardList = currCardList.sort((a, b) => new Date(b.date) - new Date(a.date));
             }
-
-
             return item;
         });
         setList(currList);
@@ -60,7 +58,6 @@ const Generate = () => {
         setList(currList);
     }, [list]);
 
-    // console.log('generate', list);
     return <Fragment>
         <IconButton onClick={handleNewListAddButton} style={{
             textAlign: 'end',

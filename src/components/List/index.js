@@ -32,20 +32,22 @@ const List = props => {
             handleCardDeleteButton(parseInt(listIndexOfCardToMove), parseInt(cardIndexToMove));
             handleCardAddButton(parseInt(e.target.id), cardToMove);
         }
-
     }, [handleCardDeleteButton, handleCardAddButton]);
 
-    // console.log('list', listValue);
     return <div id={index} className={classes.container} onDragOver={handleOnDragOver} onDrop={handleOnDrop}>
         <div className={classes.header} >
             {listValue.title}
-            <IconButton onClick={handleDeleteButton} style={{ cursor: 'pointer' }}>
+            <IconButton onClick={handleDeleteButton} style={{
+                cursor: 'pointer',
+                paddingLeft: '0.5rem'
+            }}>
                 <DeleteIcon />
             </IconButton>
         </div>
         <IconButton onClick={handleNewCardAddButton} style={{
             cursor: 'pointer',
-            marginBottom: '1rem'
+            margin: '0 auto 1rem',
+            width: 'fit-content'
         }}>
             <AddIcon />
         </IconButton>
